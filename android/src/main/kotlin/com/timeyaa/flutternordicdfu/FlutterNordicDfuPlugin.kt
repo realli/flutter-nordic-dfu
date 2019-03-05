@@ -77,6 +77,7 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
     private fun startDfu(address: String, name: String?, filePath: String, result: Result) {
         val starter = DfuServiceInitiator(address)
                 .setZip(filePath)
+                .setForeground(false)
                 .setKeepBond(true)
         if (name != null) {
             starter.setDeviceName(name)
