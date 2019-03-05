@@ -86,7 +86,7 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
 
         pendingResult = result
 
-        starter.setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(true)
+        // starter.setUnsafeExperimentalButtonlessServiceInSecureDfuEnabled(true)
         controller = starter.start(mContext, DfuService::class.java)
     }
 
