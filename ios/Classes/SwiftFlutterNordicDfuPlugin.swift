@@ -57,12 +57,12 @@ public class SwiftFlutterNordicDfuPlugin: NSObject, FlutterPlugin, DFUServiceDel
             return
         }
         
-        let dfuInitiator = DFUServiceInitiator(target:peripherals.first!)
+        let dfuInitiator = DFUServiceInitiator(centralManager: centralManager!, target:peripherals.first!)
             .with(firmware: firmware);
         dfuInitiator.delegate = self
         dfuInitiator.progressDelegate = self
         dfuInitiator.logger = self
-        dfuInitiator.enableUnsafeExperimentalButtonlessServiceInSecureDfu = true
+        dfuInitiator.enableUnsafeExperimentalButtonlessServiceInSecureDfu = false
         pendingResult = result
         deviceAddress = address
         
