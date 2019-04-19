@@ -92,12 +92,12 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
     }
 
     private val mDfuProgressListener = object : DfuProgressListenerAdapter() {
-        override fun onDeviceConnected(deviceAddress: String?) {
+        override fun onDeviceConnected(deviceAddress: String) {
             super.onDeviceConnected(deviceAddress)
             channel.invokeMethod("onDeviceConnected", deviceAddress)
         }
 
-        override fun onError(deviceAddress: String?, error: Int, errorType: Int, message: String?) {
+        override fun onError(deviceAddress: String, error: Int, errorType: Int, message: String?) {
             super.onError(deviceAddress, error, errorType, message)
             channel.invokeMethod("onError", deviceAddress)
 
@@ -105,12 +105,12 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
             pendingResult = null
         }
 
-        override fun onDeviceConnecting(deviceAddress: String?) {
+        override fun onDeviceConnecting(deviceAddress: String) {
             super.onDeviceConnecting(deviceAddress)
             channel.invokeMethod("onDeviceConnecting", deviceAddress)
         }
 
-        override fun onDeviceDisconnected(deviceAddress: String?) {
+        override fun onDeviceDisconnected(deviceAddress: String) {
             super.onDeviceDisconnected(deviceAddress)
             channel.invokeMethod("onDeviceDisconnected", deviceAddress)
         }
@@ -120,7 +120,7 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
             channel.invokeMethod("onDeviceDisconnecting", deviceAddress)
         }
 
-        override fun onDfuAborted(deviceAddress: String?) {
+        override fun onDfuAborted(deviceAddress: String) {
             super.onDfuAborted(deviceAddress)
 
             pendingResult?.error("2", "DFU ABORTED", "device address: $deviceAddress")
@@ -129,7 +129,7 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
             channel.invokeMethod("onDfuAborted", deviceAddress)
         }
 
-        override fun onDfuCompleted(deviceAddress: String?) {
+        override fun onDfuCompleted(deviceAddress: String) {
             super.onDfuCompleted(deviceAddress)
 
             pendingResult?.success(deviceAddress)
@@ -138,27 +138,27 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
             channel.invokeMethod("onDfuCompleted", deviceAddress)
         }
 
-        override fun onDfuProcessStarted(deviceAddress: String?) {
+        override fun onDfuProcessStarted(deviceAddress: String) {
             super.onDfuProcessStarted(deviceAddress)
             channel.invokeMethod("onDfuProcessStarted", deviceAddress)
         }
 
-        override fun onDfuProcessStarting(deviceAddress: String?) {
+        override fun onDfuProcessStarting(deviceAddress: String) {
             super.onDfuProcessStarting(deviceAddress)
             channel.invokeMethod("onDfuProcessStarting", deviceAddress)
         }
 
-        override fun onEnablingDfuMode(deviceAddress: String?) {
+        override fun onEnablingDfuMode(deviceAddress: String) {
             super.onEnablingDfuMode(deviceAddress)
             channel.invokeMethod("onEnablingDfuMode", deviceAddress)
         }
 
-        override fun onFirmwareValidating(deviceAddress: String?) {
+        override fun onFirmwareValidating(deviceAddress: String) {
             super.onFirmwareValidating(deviceAddress)
             channel.invokeMethod("onFirmwareValidating", deviceAddress)
         }
 
-        override fun onProgressChanged(deviceAddress: String?, percent: Int, speed: Float, avgSpeed: Float, currentPart: Int, partsTotal: Int) {
+        override fun onProgressChanged(deviceAddress: String, percent: Int, speed: Float, avgSpeed: Float, currentPart: Int, partsTotal: Int) {
             super.onProgressChanged(deviceAddress, percent, speed, avgSpeed, currentPart, partsTotal)
 
             val paras = hashMapOf("percent" to percent, "speed" to speed, "avgSpeed" to avgSpeed, "currentPart" to currentPart, "partsTotal" to partsTotal)
