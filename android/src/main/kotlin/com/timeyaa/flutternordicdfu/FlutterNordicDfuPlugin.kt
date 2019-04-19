@@ -80,6 +80,7 @@ class FlutterNordicDfuPlugin(private val registrar: Registrar) : MethodCallHandl
                 .setForeground(false)
                 .setDisableNotification(true)
                 .setKeepBond(false)
+		.setNumberOfRetries(3)
         if (name != null) {
             starter.setDeviceName(name)
         }
